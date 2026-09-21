@@ -1,0 +1,2 @@
+# Purpose: Install the package; runtime remains stdlib-only.
+-e .

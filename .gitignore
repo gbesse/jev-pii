@@ -1,0 +1,9 @@
+# Purpose: Exclude sensitive local scan artifacts and Python builds.
+__pycache__/
+.venv/
+*.egg-info/
+dist/
+.local/
+local-data/
+*.sqlite*
+.jev-cache*

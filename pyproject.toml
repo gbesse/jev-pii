@@ -1,0 +1,15 @@
+# Purpose: Package and CLI metadata for local-first PII inventory.
+[build-system]
+requires=["setuptools>=68"]
+build-backend="setuptools.build_meta"
+[project]
+name="jev-pii"
+version="0.1.0"
+description="Local deterministic PII detection with optional column-level semantic sampling."
+requires-python=">=3.11"
+license={text="MIT"}
+dependencies=[]
+[project.scripts]
+jev-pii="jev_pii.cli:main"
+[tool.setuptools.packages.find]
+where=["src"]
