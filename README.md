@@ -9,6 +9,10 @@ This tool can send sampled real values to a third-party API. Review `--dry-run` 
 ## 30-second offline quick start
 `git clone https://github.com/gbesse/jev-pii.git && cd jev-pii && python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements-dev.txt && python -m examples.offline_demo`
 
+## Example: detect inventory drift without sharing rows
+
+Run `python -m examples.inventory_diff` to compare two synthetic column inventories locally. It reports added columns and changed detector categories without printing sample values or making network requests. The synthetic card number also triggers the broad phone pattern, illustrating why detector output needs human review. Fill the processing-record fields yourself before acting on a real inventory.
+
 ## Call real Jev
 Set `TYPESAFE_API_KEY` only after reviewing payloads. Paid requests would go to `api.typesafe.ai`; the live transport is intentionally unwired in this alpha, and `python scripts/live_smoke.py` makes zero calls.
 
