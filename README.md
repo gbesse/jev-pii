@@ -11,6 +11,8 @@ This tool can send sampled real values to a third-party API. Review `--dry-run` 
 
 ## Example: detect inventory drift without sharing rows
 
+`python -m examples.inventory_diff` now shows both a synthetic PII increase and a remediation pass that removes the payment column and phone number. It stays local and reports no network payloads. / L'exemple montre aussi la suppression des données sensibles sans envoi réseau. / El ejemplo muestra también la eliminación de datos sensibles sin envío por red.
+
 Run `python -m examples.inventory_diff` to compare two synthetic column inventories locally. It reports added columns and changed detector categories without printing sample values or making network requests. The synthetic card number also triggers the broad phone pattern, illustrating why detector output needs human review. Fill the processing-record fields yourself before acting on a real inventory.
 
 ## Call real Jev
