@@ -1,4 +1,9 @@
-# Purpose: Guard the unwired paid semantic adapter.
-import os
-if not os.getenv('TYPESAFE_API_KEY'):raise SystemExit('Set TYPESAFE_API_KEY')
-raise SystemExit('Live semantic transport is not wired in this alpha; zero requests made')
+"""Network transport smoke using loopback only; no API key and no paid request."""
+
+import runpy
+from pathlib import Path
+
+runpy.run_path(
+    str(Path(__file__).resolve().parents[1] / "examples" / "transport_demo.py"),
+    run_name="__main__",
+)

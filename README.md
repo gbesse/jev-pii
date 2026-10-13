@@ -15,8 +15,13 @@ This tool can send sampled real values to a third-party API. Review `--dry-run` 
 
 Run `python -m examples.inventory_diff` to compare two synthetic column inventories locally. It reports added columns and changed detector categories without printing sample values or making network requests. The synthetic card number also triggers the broad phone pattern, illustrating why detector output needs human review. Fill the processing-record fields yourself before acting on a real inventory.
 
-## Call real Jev
-Set `TYPESAFE_API_KEY` only after reviewing payloads. Paid requests would go to `api.typesafe.ai`; the live transport is intentionally unwired in this alpha, and `python scripts/live_smoke.py` makes zero calls.
+## Classification Jev / Jev classification / Clasificación Jev
+
+FR : Le transport est disponible avec `scan --live --approve-plan <sha256>`. Prévisualisez d’abord avec `scan --dry-run` ; le CLI reste local par défaut. [Guide FR/EN/ES](docs/live-classification.md).
+
+EN: The transport is available through `scan --live --approve-plan <sha256>`. Preview with `scan --dry-run` first; the CLI stays local by default. [FR/EN/ES guide](docs/live-classification.md).
+
+ES: El transporte está disponible con `scan --live --approve-plan <sha256>`. Previsualice con `scan --dry-run`; el CLI es local por defecto. [Guía FR/EN/ES](docs/live-classification.md).
 
 ## Library and integration
 Use `detect`, `scan_columns`, `payload_for`, `diff`, and `html_report`. CLI commands are `scan`, `estimate`, `report`, and `diff`. Input in this alpha is a JSON map of column names to values.
