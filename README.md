@@ -39,3 +39,11 @@ Run `python -m compileall -q src tests && python -m unittest discover -s tests &
 [DecisionPacks](https://github.com/gbesse/decisionpacks), [Autonomy Meter](https://github.com/gbesse/autonomy-meter), and [jev-codebook](https://github.com/gbesse/jev-codebook).
 
 Independent project; not affiliated with TypeSafe AI. [API documentation](https://docs.typesafe.ai/api) · [model notes](https://docs.typesafe.ai/model-jaggedness/jev-1.13/)
+
+## Inventory coverage / Couverture de l’inventaire / Cobertura del inventario
+
+EN: Each column now reports provided rows, nonempty rows, matching rows, per-detector row counts and the exact planned semantic sample count. Overlapping detectors count the same row once in `matched_rows`. Supplied population `row_count` remains separate and cannot be smaller than the provided rows. These counters describe inspected data, not prevalence across unprovided data, detector accuracy or legal certainty. Counts contain no sample values; dry-run payloads still contain the approved samples.
+
+FR : Chaque colonne indique désormais les lignes fournies, non vides, détectées, les comptages par détecteur et le nombre exact d’échantillons sémantiques prévus. Les détecteurs qui se recouvrent ne comptent la ligne qu’une fois dans `matched_rows`. Le `row_count` de population reste distinct et ne peut être inférieur aux lignes fournies. Ces compteurs décrivent les données examinées, pas la prévalence dans les données absentes, la précision ni une certitude juridique. Les compteurs ne contiennent aucune valeur ; les requêtes prévisualisées contiennent toujours les échantillons approuvés.
+
+ES: Cada columna informa filas proporcionadas, no vacías, detectadas, recuentos por detector y el número exacto de muestras semánticas previstas. Detectores solapados cuentan una fila una sola vez en `matched_rows`. El `row_count` poblacional sigue separado y no puede ser menor que las filas proporcionadas. Los recuentos describen datos inspeccionados, no prevalencia en datos ausentes, precisión ni certeza jurídica. No contienen valores; las peticiones previsualizadas siguen conteniendo muestras aprobadas.
