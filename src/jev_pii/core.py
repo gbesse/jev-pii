@@ -149,6 +149,14 @@ def scan_columns(
     validate_columns(columns)
     if lang not in TEXT:
         raise PiiError("bounds")
+    if isinstance(sample_size, bool) or not isinstance(sample_size, int) or not 1 <= sample_size <= 100:
+        raise PiiError("bounds")
+    if row_counts is not None:
+        if not isinstance(row_counts, dict) or any(
+            name not in columns or isinstance(count, bool) or not isinstance(count, int) or count < len(columns[name])
+            for name, count in row_counts.items()
+        ):
+            raise PiiError("input_error")
     plan = (
         preview_plan(columns, mask=mask, sample_size=sample_size, seed=seed, lang=lang)
         if not local_only
@@ -158,16 +166,26 @@ def scan_columns(
     payloads = []
     for name in sorted(columns):
         values = columns[name]
-        local = sorted({kind for value in values for kind in detect(value)})
+        nonempty = [value for value in values if value is not None and str(value).strip()]
+        matches = [detect(value) for value in nonempty]
+        local = sorted({kind for row in matches for kind in row})
         entry = {
             "column": name,
             "layers": ["local"] if local else [],
             "detectors": local,
             "row_count": (row_counts or {}).get(name, len(values)),
             "confidence": 1 if local else 0,
+            "coverage": {
+                "provided_rows": len(values),
+                "nonempty_rows": len(nonempty),
+                "matched_rows": sum(bool(row) for row in matches),
+                "detector_counts": {kind: sum(kind in row for row in matches) for kind in local},
+                "semantic_sample_count": 0,
+            },
         }
         if not local_only:
             payload = plan["payloads"][len(findings)]
+            entry["coverage"]["semantic_sample_count"] = len(json.loads(payload)["state"]["samples"])
             if dry_run:
                 payloads.append(payload)
             if not dry_run:
