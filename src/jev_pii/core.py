@@ -1,5 +1,6 @@
 # Purpose: Local detectors, seeded column sampling, payload controls and inventory diff.
 import hashlib, json, random, re, math
+from copy import deepcopy
 from .i18n import TEXT, PiiError, questions
 from .client import MAX_PAYLOAD
 
@@ -157,6 +158,9 @@ def scan_columns(
             for name, count in row_counts.items()
         ):
             raise PiiError("input_error")
+    # A transport may call back into caller code; keep local evidence bound to the preview.
+    columns = {name: list(values) for name, values in columns.items()}
+    row_counts = dict(row_counts) if row_counts is not None else None
     plan = (
         preview_plan(columns, mask=mask, sample_size=sample_size, seed=seed, lang=lang)
         if not local_only
@@ -189,7 +193,7 @@ def scan_columns(
             if dry_run:
                 payloads.append(payload)
             if not dry_run:
-                answer = transport.send(payload)
+                answer = deepcopy(transport.send(payload))
                 entry.update(
                     {"semantic": answer, "confidence": answer.get("personal", 0)}
                 )
