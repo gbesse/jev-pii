@@ -54,7 +54,7 @@ class Tests(unittest.TestCase):
             ]
         }
         self.assertEqual(
-            diff(a, b), {"added": ["c"], "removed": ["b"], "recategorized": ["a"]}
+            diff(a, b), {"added": ["c"], "removed": ["b"], "recategorized": ["a"], "coverage_changed": [], "coverage_regressions": [], "coverage_unchecked": [{"column":"a","side":"before"},{"column":"a","side":"after"}]}
         )
 
 
