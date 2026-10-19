@@ -54,3 +54,11 @@ FR : Le scan fige les colonnes et les comptes de population avant le premier app
 EN: A scan snapshots columns and population counts before its first transport call. Local findings stay bound to preview-plan data even if a callback mutates inputs. Each transport answer is copied to preserve previously processed columns. Tests use fictional data; no measured accuracy gain or regulatory compliance claim.
 
 ES: El escaneo fija columnas y recuentos de población antes de la primera llamada de transporte. Los hallazgos locales siguen vinculados a los datos del plan previo aunque un callback cambie las entradas. Cada respuesta se copia para preservar columnas ya procesadas. Tests con datos ficticios; sin mejora de precisión medida ni garantía de cumplimiento normativo.
+
+## Régression de couverture / Coverage regressions / Regresiones de cobertura
+
+FR — `diff()` et `coverage_diff()` signalent les changements de couverture et les baisses de proportion de lignes fournies par rapport au total déclaré, même sans changement de détecteur. Métadonnées absentes ou invalides restent `coverage_unchecked`. La comparaison ne contient aucune valeur source. Le total est déclaré par l’appelant, pas vérifié en base ; une couverture complète ne prouve jamais l’absence de données personnelles.
+
+EN — `diff()` and `coverage_diff()` flag coverage changes and declining provided-row fractions against declared totals, even when detectors are unchanged. Missing or invalid metadata remains `coverage_unchecked`. The comparison contains no source values. Population totals are caller-declared, not database-verified; complete coverage never establishes absence of personal data.
+
+ES — `diff()` y `coverage_diff()` señalan cambios de cobertura y descensos de proporción de filas aportadas frente al total declarado, aunque detectores no cambien. Metadatos ausentes o inválidos quedan `coverage_unchecked`. La comparación no contiene valores fuente. Totales son declarados por quien llama, no verificados en base; cobertura completa nunca prueba ausencia de datos personales.

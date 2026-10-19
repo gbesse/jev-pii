@@ -223,6 +223,7 @@ def diff(previous, current):
     return {
         "added": sorted(new.keys() - old.keys()),
         "removed": sorted(old.keys() - new.keys()),
+        **coverage_diff(previous, current),
         "recategorized": sorted(
             k
             for k in old.keys() & new.keys()
@@ -230,6 +231,32 @@ def diff(previous, current):
             or old[k].get("semantic") != new[k].get("semantic")
         ),
     }
+
+
+def coverage_diff(previous, current):
+    """Compare declared row coverage without returning values or claiming PII absence."""
+    old = {x["column"]: x for x in previous["findings"]}
+    new = {x["column"]: x for x in current["findings"]}
+    changed, regressions, unchecked = [], [], []
+    for name in sorted(old.keys() & new.keys()):
+        a, b = old[name], new[name]
+        if a.get("coverage") != b.get("coverage") or a.get("row_count") != b.get("row_count"):
+            changed.append(name)
+        fractions = []
+        for side, item in (("before", a), ("after", b)):
+            coverage = item.get("coverage")
+            provided = coverage.get("provided_rows") if isinstance(coverage, dict) else None
+            total = item.get("row_count")
+            if type(provided) is not int or type(total) is not int or not 0 <= provided <= total:
+                unchecked.append({"column": name, "side": side})
+                fractions.append(None)
+            else:
+                fractions.append((provided, total) if total else (1, 1))
+        if all(fraction is not None for fraction in fractions):
+            (a_num, a_den), (b_num, b_den) = fractions
+            if b_num * a_den < a_num * b_den:
+                regressions.append(name)
+    return {"coverage_changed": changed, "coverage_regressions": regressions, "coverage_unchecked": unchecked}
 
 
 def html_report(result, lang="en"):
