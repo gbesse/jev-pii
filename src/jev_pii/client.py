@@ -71,6 +71,19 @@ def validate_response(data, model="jev-1.13.0"):
         raise PiiError("response") from None
 
 
+def _unique_members(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise PiiError("response")
+        result[key] = value
+    return result
+
+
+def _reject_constant(_value):
+    raise PiiError("response")
+
+
 class NoRedirect(request.HTTPRedirectHandler):
     def redirect_request(self, *args, **kwargs):
         return None
@@ -130,7 +143,7 @@ class TypeSafeTransport:
                 raw = response.read(MAX_RESPONSE + 1)
             if len(raw) > MAX_RESPONSE:
                 raise PiiError("response")
-            data = json.loads(raw)
+            data = json.loads(raw, object_pairs_hook=_unique_members, parse_constant=_reject_constant)
         except PiiError:
             raise
         except HTTPError as err:
