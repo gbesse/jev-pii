@@ -62,3 +62,11 @@ FR — `diff()` et `coverage_diff()` signalent les changements de couverture et 
 EN — `diff()` and `coverage_diff()` flag coverage changes and declining provided-row fractions against declared totals, even when detectors are unchanged. Missing or invalid metadata remains `coverage_unchecked`. The comparison contains no source values. Population totals are caller-declared, not database-verified; complete coverage never establishes absence of personal data.
 
 ES — `diff()` y `coverage_diff()` señalan cambios de cobertura y descensos de proporción de filas aportadas frente al total declarado, aunque detectores no cambien. Metadatos ausentes o inválidos quedan `coverage_unchecked`. La comparación no contiene valores fuente. Totales son declarados por quien llama, no verificados en base; cobertura completa nunca prueba ausencia de datos personales.
+
+## Unambiguous response JSON / JSON non ambigu / JSON sin ambigüedad
+
+FR — Le transport refuse les clés JSON dupliquées à toute profondeur ainsi que NaN et les infinis avant validation du modèle ou des probabilités. L’erreur localisée ne reproduit aucun contenu brut. Les essais utilisent un serveur HTTP loopback synthétique, sans clé réelle.
+
+EN — The transport rejects duplicate JSON members at any depth and NaN/infinities before model or probability validation. The localized error never reproduces raw response content. Tests use synthetic loopback HTTP without a real key.
+
+ES — El transporte rechaza claves JSON duplicadas a cualquier profundidad y NaN/infinitos antes de validar modelo o probabilidades. El error traducido no reproduce la respuesta original. Las pruebas usan HTTP loopback sintético sin clave real.
