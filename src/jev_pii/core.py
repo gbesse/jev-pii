@@ -274,3 +274,17 @@ def html_report(result, lang="en"):
         .replace("<", "&lt;")
         + "</pre></html>"
     )
+
+
+def sample_plan_for_prevalence(population, minimum_positive_rows, miss_probability=0.05):
+    error="Paramètres d’échantillonnage invalides / Invalid sampling parameters / Parámetros de muestreo inválidos"
+    if type(population)is not int or type(minimum_positive_rows)is not int or not 1<=minimum_positive_rows<=population<=10_000_000 or type(miss_probability)not in(int,float)or not math.isfinite(miss_probability)or not 0<miss_probability<1:raise ValueError(error)
+    def miss(n):
+        if n>population-minimum_positive_rows:return 0.0
+        return min(1.0,math.exp(min(0.0,math.lgamma(population-minimum_positive_rows+1)-math.lgamma(population-minimum_positive_rows-n+1)-math.lgamma(population+1)+math.lgamma(population-n+1))))
+    lo,hi=0,population
+    while lo<hi:
+        mid=(lo+hi)//2
+        if miss(mid)<=miss_probability:hi=mid
+        else:lo=mid+1
+    return {"sample_size":lo,"miss_probability_under_assumption":miss(lo),"previous_size_miss_probability":miss(lo-1)if lo else None,"minimum_positive_rows_assumed":minimum_positive_rows,"population":population,"sampling":"uniform_without_replacement","absence_certified":False}

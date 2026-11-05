@@ -70,3 +70,12 @@ FR — Le transport refuse les clés JSON dupliquées à toute profondeur ainsi 
 EN — The transport rejects duplicate JSON members at any depth and NaN/infinities before model or probability validation. The localized error never reproduces raw response content. Tests use synthetic loopback HTTP without a real key.
 
 ES — El transporte rechaza claves JSON duplicadas a cualquier profundidad y NaN/infinitos antes de validar modelo o probabilidades. El error traducido no reproduce la respuesta original. Las pruebas usan HTTP loopback sintético sin clave real.
+
+
+## 2026-11-05 — FR / EN / ES
+
+FR : `sample_plan_for_prevalence(N,K,alpha)` calcule une taille sans remplacement sous hypothèse d’au moins K lignes positives. Retourne aussi la probabilité de manquer toutes ces lignes et celle de la taille précédente. Ne certifie aucune absence de PII ; population et prévalence minimale doivent être justifiées.
+
+EN: `sample_plan_for_prevalence(N,K,alpha)` computes a without-replacement size assuming at least K positive rows. Returns probability of missing them all and that of the previous size. Does not certify PII absence; population and minimum prevalence require justification.
+
+ES: `sample_plan_for_prevalence(N,K,alpha)` calcula tamaño sin reemplazo suponiendo al menos K filas positivas. Devuelve probabilidad de omitirlas todas y la del tamaño anterior. No certifica ausencia de PII; justificar población y prevalencia mínima.
