@@ -79,3 +79,12 @@ FR : `sample_plan_for_prevalence(N,K,alpha)` calcule une taille sans remplacemen
 EN: `sample_plan_for_prevalence(N,K,alpha)` computes a without-replacement size assuming at least K positive rows. Returns probability of missing them all and that of the previous size. Does not certify PII absence; population and minimum prevalence require justification.
 
 ES: `sample_plan_for_prevalence(N,K,alpha)` calcula tamaño sin reemplazo suponiendo al menos K filas positivas. Devuelve probabilidad de omitirlas todas y la del tamaño anterior. No certifica ausencia de PII; justificar población y prevalencia mínima.
+
+
+## 2026-11-12 — FR / EN / ES
+
+FR : Échantillonner plusieurs strates sans exporter de valeurs et exposer les strates non inspectées.
+
+EN: Sample multiple strata without exporting values and expose uninspected strata.
+
+ES: Muestrear varias capas sin exportar valores y exponer capas sin inspeccionar.
